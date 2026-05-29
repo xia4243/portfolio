@@ -55,18 +55,19 @@ npm run typecheck
 
 ---
 
-## ✏️ 公開前に差し替える箇所（重要）
+## ✏️ カスタマイズ状況
 
-サンプルとして **プレースホルダ** が入っています。応募用に必ず差し替えてください。
+氏名・ロゴ・連絡先・GitHub は設定済みです。写真と公開ドメインは任意で差し替えてください。
 
-| 項目 | 現在の値 | 探し方・変更箇所 |
+| 項目 | 状態 | 変更箇所 |
 |---|---|---|
-| 氏名 | `夏目崎子` / `NATSUME SAKIKO` | 全ファイルで検索して置換 |
-| ロゴの頭文字 | `Y`（`.brand__mark`） | `index.html` の `<span class="brand__mark">N</span>` |
-| メールアドレス | `hello@example.com` | `index.html` の Contact 内 |
-| GitHub リンク | `github.com/xia4243` | `index.html` / `works/strawberry.html` |
-| プロフィール写真 | プレースホルダ枠 | `index.html` の `.about__photo` に `<img>` を配置 |
-| 各 LP の写真 | 「写真（差し替え）」枠 | `.photo-ph` 等を実画像に置換 |
+| 氏名 `夏目崎子` / `NATSUME SAKIKO` | ✅ 設定済み | — |
+| ロゴ `N` / `NATSUME.` | ✅ 設定済み | `.brand__mark` |
+| メール `xia4243@gmail.com` | ✅ 設定済み | `index.html` Contact / JSON-LD |
+| GitHub `github.com/xia4243` | ✅ 設定済み | — |
+| プロフィール写真 | 🔲 任意 | `index.html` の `.about__photo` に `<img>` を配置 |
+| 各 LP の写真 | 🔲 任意 | `.photo-ph` 枠を実画像に置換 |
+| 公開ドメイン | 🔲 任意 | JSON-LD の `url` / `<link rel=canonical>` / `robots.txt` の Sitemap 行 |
 
 ### お問い合わせフォームを実際に動かす
 
