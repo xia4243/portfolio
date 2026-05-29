@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# 公開ドメイン確定後に有効化:
-# Sitemap: https://your-domain.example/sitemap.xml
+Sitemap: https://xia4243.github.io/portfolio/sitemap.xml

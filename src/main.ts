@@ -107,12 +107,44 @@ function initYear(): void {
   })
 }
 
+/* ---------- Scroll progress bar ---------- */
+function initScrollProgress(): void {
+  const bar = document.createElement('div')
+  bar.className = 'scroll-progress'
+  bar.setAttribute('aria-hidden', 'true')
+  document.body.appendChild(bar)
+  const update = () => {
+    const el = document.documentElement
+    const max = el.scrollHeight - el.clientHeight
+    bar.style.width = (max > 0 ? (el.scrollTop / max) * 100 : 0) + '%'
+  }
+  update()
+  window.addEventListener('scroll', update, { passive: true })
+  window.addEventListener('resize', update, { passive: true })
+}
+
+/* ---------- Back to top ---------- */
+function initBackToTop(): void {
+  const btn = document.createElement('button')
+  btn.type = 'button'
+  btn.className = 'back-to-top'
+  btn.setAttribute('aria-label', 'ページ上部へ戻る')
+  btn.textContent = '↑'
+  document.body.appendChild(btn)
+  const toggle = () => btn.classList.toggle('is-visible', window.scrollY > 600)
+  toggle()
+  window.addEventListener('scroll', toggle, { passive: true })
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
+}
+
 function boot(): void {
   initHeader()
   initDrawer()
   initReveal()
   initCountUp()
   initYear()
+  initScrollProgress()
+  initBackToTop()
 }
 
 if (document.readyState !== 'loading') boot()

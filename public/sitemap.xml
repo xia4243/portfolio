@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://xia4243.github.io/portfolio/</loc><priority>1.0</priority></url>
+  <url><loc>https://xia4243.github.io/portfolio/works/strawberry.html</loc><priority>0.8</priority></url>
+  <url><loc>https://xia4243.github.io/portfolio/samples/corporate.html</loc><priority>0.7</priority></url>
+  <url><loc>https://xia4243.github.io/portfolio/samples/corporate-news.html</loc><priority>0.5</priority></url>
+  <url><loc>https://xia4243.github.io/portfolio/samples/cafe.html</loc><priority>0.7</priority></url>
+  <url><loc>https://xia4243.github.io/portfolio/samples/saas.html</loc><priority>0.7</priority></url>
+  <url><loc>https://xia4243.github.io/portfolio/samples/clinic.html</loc><priority>0.7</priority></url>
+</urlset>

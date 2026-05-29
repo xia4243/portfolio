@@ -242,3 +242,36 @@
 .stat__num .unit { font-size: 0.45em; margin-left: 0.15em; color: var(--c-accent); }
 .stat__label { font-size: var(--fs-sm); color: var(--c-ink-3); margin-top: var(--sp-2); }
 .section--ink .stat__label { color: rgba(247, 244, 238, 0.7); }
+
+/* ---------- Scroll progress bar ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px; width: 0;
+  background: var(--c-accent);
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+/* ---------- Back to top ---------- */
+.back-to-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  font-size: 1.15rem; line-height: 1;
+  display: grid; place-items: center;
+  box-shadow: var(--sh-md);
+  opacity: 0; visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease), visibility var(--t-base),
+    background var(--t-base) var(--ease);
+  z-index: var(--z-top);
+}
+.back-to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.back-to-top:hover { background: var(--c-accent); transform: translateY(-2px); }
