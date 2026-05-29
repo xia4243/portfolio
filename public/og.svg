@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="夏目崎子 Web制作・フロントエンド ポートフォリオ">
+  <defs>
+    <radialGradient id="circle" cx="32%" cy="28%" r="80%">
+      <stop offset="0%" stop-color="#f06b4f"/>
+      <stop offset="48%" stop-color="#df4d2f"/>
+      <stop offset="100%" stop-color="#bd3a1f"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1b1712"/>
+      <stop offset="100%" stop-color="#16130f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- subtle dot grid -->
+  <g fill="#ffffff" opacity="0.05">
+    <circle cx="60" cy="60" r="2"/><circle cx="140" cy="60" r="2"/><circle cx="220" cy="60" r="2"/>
+    <circle cx="60" cy="140" r="2"/><circle cx="140" cy="140" r="2"/>
+    <circle cx="1140" cy="570" r="2"/><circle cx="1060" cy="570" r="2"/><circle cx="980" cy="570" r="2"/>
+    <circle cx="1140" cy="490" r="2"/><circle cx="1060" cy="490" r="2"/>
+  </g>
+
+  <!-- vermilion circle motif (right) -->
+  <circle cx="940" cy="315" r="200" fill="url(#circle)"/>
+  <text x="940" y="315" font-family="'Shippori Mincho B1', 'Yu Mincho', serif" font-size="150" font-weight="700"
+        fill="#ffffff" fill-opacity="0.94" text-anchor="middle" dominant-baseline="central" letter-spacing="6">成果</text>
+
+  <!-- text block (left) -->
+  <text x="90" y="250" font-family="'Shippori Mincho B1', 'Yu Mincho', serif" font-size="92" font-weight="700"
+        fill="#f7f4ee" letter-spacing="4">夏目崎子</text>
+  <text x="94" y="318" font-family="'Noto Sans JP', sans-serif" font-size="30" font-weight="500"
+        fill="#df4d2f" letter-spacing="10">NATSUME SAKIKO</text>
+  <rect x="94" y="360" width="64" height="4" rx="2" fill="#df4d2f"/>
+  <text x="90" y="430" font-family="'Noto Sans JP', sans-serif" font-size="44" font-weight="700"
+        fill="#f7f4ee" letter-spacing="2">Web制作・フロントエンド</text>
+  <text x="92" y="486" font-family="'Noto Sans JP', sans-serif" font-size="26" font-weight="400"
+        fill="#b7ada1" letter-spacing="2">LP / コーポレートサイト 制作・改修・実装</text>
+</svg>

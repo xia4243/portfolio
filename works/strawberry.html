@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>イチゴ熟度検出システム ｜ ケーススタディ ｜ 夏目崎子 ポートフォリオ</title>
+  <meta name="description" content="Vue 3 + Spring Boot + YOLOv8 による、イチゴの熟度を4段階で自動判定する Web アプリケーション。設計・フロントエンド・API 連携・公開までを担当したケーススタディ。" />
+  <meta name="theme-color" content="#16130f" />
+
+  <!-- OGP -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="イチゴ熟度検出システム ｜ ケーススタディ ｜ 夏目崎子 ポートフォリオ" />
+  <meta property="og:description" content="Vue 3 + Spring Boot + YOLOv8 による、イチゴの熟度を4段階で自動判定する Web アプリのケーススタディ。" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="../og.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316130f'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23df4d2f'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    .case-bar {
+      position: fixed; inset: 0 0 auto 0; z-index: var(--z-top);
+      background: var(--c-ink); color: var(--c-paper);
+      font-size: var(--fs-xs); padding: 0.5em 1em;
+      display: flex; justify-content: space-between; align-items: center; gap: 1em;
+    }
+    .case-bar a { color: var(--c-paper); font-weight: 600; }
+    .case-bar a:hover { color: var(--c-accent); }
+
+    .case-hero { padding-top: calc(36px + var(--sp-9)); padding-bottom: var(--sp-8); background: var(--c-paper-2); }
+    .case-hero h1 { font-size: var(--fs-display); margin: var(--sp-4) 0; }
+    .case-meta { display: flex; flex-wrap: wrap; gap: var(--sp-6); margin-top: var(--sp-6); }
+    .case-meta dt { font-size: var(--fs-xs); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--c-ink-3); }
+    .case-meta dd { font-weight: 600; margin-top: 2px; }
+
+    .browser {
+      border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-lg);
+      border: 1px solid var(--c-line-2); background: #fff;
+    }
+    .browser__bar { height: 38px; background: var(--c-paper-2); display: flex; align-items: center; gap: 6px; padding: 0 14px; border-bottom: 1px solid var(--c-line-2); }
+    .browser__bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--c-paper-3); }
+    .browser__bar i:nth-child(1){ background:#ff5f57 } .browser__bar i:nth-child(2){ background:#febc2e } .browser__bar i:nth-child(3){ background:#28c840 }
+    .browser__body {
+      aspect-ratio: 16/9; display: grid; place-items: center; color: var(--c-ink-3); text-align: center;
+      background:
+        linear-gradient(150deg, #ffe3d8, #ffb59e 60%, #ff8f6e);
+    }
+    .browser__body .ph { background: rgba(255,255,255,.85); padding: .8em 1.4em; border-radius: var(--r-pill); font-size: var(--fs-sm); }
+
+    /* architecture */
+    .arch { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); align-items: stretch; }
+    .arch__node { background: var(--c-white); border: 1px solid var(--c-line); border-radius: var(--r-md); padding: var(--sp-5); position: relative; }
+    .arch__node h4 { font-size: var(--fs-body); margin-bottom: var(--sp-2); }
+    .arch__node .role { font-size: var(--fs-xs); color: var(--c-accent); letter-spacing: var(--ls-wide); text-transform: uppercase; }
+    .arch__node p { font-size: var(--fs-xs); color: var(--c-ink-2); margin-top: var(--sp-2); }
+    .arch__node:not(:last-child)::after {
+      content: "→"; position: absolute; right: -16px; top: 50%; transform: translateY(-50%);
+      color: var(--c-accent); font-weight: 700; z-index: 2;
+    }
+    @media (max-width: 760px){
+      .arch { grid-template-columns: 1fr; gap: var(--sp-6); }
+      .arch__node:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -22px; transform: translateX(50%); }
+    }
+
+    .feat { display: flex; gap: var(--sp-4); }
+    .feat .n { font-family: var(--font-mono); color: var(--c-accent); font-size: var(--fs-sm); padding-top: 3px; }
+    .feat h4 { font-size: var(--fs-body); }
+    .feat p { font-size: var(--fs-sm); color: var(--c-ink-2); }
+
+    .stack-grid { display:flex; flex-wrap:wrap; gap: var(--sp-2); }
+    .photo-ph { background: repeating-linear-gradient(45deg, var(--c-paper-3) 0 2px, transparent 2px 16px), linear-gradient(160deg, var(--c-paper-2), var(--c-paper-3)); display:grid; place-items:center; color:var(--c-ink-3); font-size:var(--fs-sm); border-radius: var(--r-md); text-align:center; }
+  </style>
+</head>
+
+<body>
+  <div class="case-bar">
+    <span>Case Study ・ 実案件（卒業研究 → Web アプリ化）</span>
+    <a href="../index.html">← ポートフォリオに戻る</a>
+  </div>
+
+  <main>
+    <!-- Hero -->
+    <header class="case-hero">
+      <div class="container">
+        <span class="eyebrow reveal">Case Study / Full-stack ・ AI</span>
+        <h1 class="reveal" data-delay="1">イチゴ熟度検出システム</h1>
+        <p class="section-lead reveal" data-delay="2">アップロードした画像から、イチゴの果実を検出し熟度を <strong>4 段階</strong>で自動判定する Web アプリケーション。卒業研究の YOLOv8 モデルを、誰でも使える Web サービスへと実装しました。</p>
+        <dl class="case-meta reveal" data-delay="3">
+          <div><dt>担当</dt><dd>企画・設計・デザイン・実装・公開</dd></div>
+          <div><dt>区分</dt><dd>個人開発</dd></div>
+          <div><dt>期間</dt><dd>2026</dd></div>
+          <div><dt>構成</dt><dd>3 層（フロント / API / AI）</dd></div>
+        </dl>
+        <div class="reveal" data-delay="4" style="margin-top:var(--sp-6);display:flex;gap:var(--sp-3);flex-wrap:wrap">
+          <a href="https://github.com/xia4243/strawberry-detection" target="_blank" rel="noopener" class="btn btn--accent">GitHub で見る <span class="arrow">↗</span></a>
+          <a href="../index.html#works" class="btn btn--ghost">他の実績を見る</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- screenshot -->
+    <section class="section" style="padding-top:var(--sp-8)">
+      <div class="container">
+        <div class="browser reveal">
+          <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="browser__body"><span class="ph">アプリ画面のスクリーンショット（差し替え）</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview / Challenge -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="u-grid cols-2" style="gap:var(--sp-8);align-items:start">
+          <div class="reveal">
+            <span class="eyebrow">Overview</span>
+            <h2 class="section-title"><span class="jp">研究成果を、<br>「使えるプロダクト」へ。</span></h2>
+            <p class="section-lead">学習済みの物体検出モデルは、そのままでは専門家しか扱えません。本プロジェクトでは、画像をアップロードするだけで誰でも熟度判定ができる Web UI を設計し、結果の可視化・PDF レポート出力・履歴管理までを実装しました。</p>
+          </div>
+          <div class="reveal" data-delay="1">
+            <span class="eyebrow">Challenge</span>
+            <h3 class="section-title" style="font-size:var(--fs-h3)"><span class="jp">取り組んだ課題</span></h3>
+            <div class="u-mt-4" style="display:grid;gap:var(--sp-4)">
+              <div class="feat"><span class="n">01</span><div><h4>専門知識なしで使える UI</h4><p>ドラッグ&ドロップで画像を投げるだけ。検出結果をその場で可視化。</p></div></div>
+              <div class="feat"><span class="n">02</span><div><h4>重い AI 処理の分離</h4><p>推論を独立サービス化し、Web 側の応答性を確保。</p></div></div>
+              <div class="feat"><span class="n">03</span><div><h4>多言語・マルチデバイス</h4><p>日中英の 3 言語対応とレスポンシブで、幅広い利用者に。</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="reveal"><span class="eyebrow">Architecture</span><h2 class="section-title"><span class="jp">システム構成</span><span class="en">3-TIER ARCHITECTURE</span></h2></div>
+        <div class="arch u-mt-8">
+          <div class="arch__node reveal"><span class="role">Frontend</span><h4>Vue 3 + Vite</h4><p>Element Plus / Pinia / vue-router / vue-i18n。画面・状態管理・多言語・ダークモード・PWA。</p></div>
+          <div class="arch__node reveal" data-delay="1"><span class="role">Backend</span><h4>Spring Boot 3</h4><p>Java 17 / Spring Security + JWT 認証 / JPA。履歴管理・PDF 出力・レート制限・管理 API。</p></div>
+          <div class="arch__node reveal" data-delay="2"><span class="role">AI Service</span><h4>FastAPI + YOLOv8</h4><p>Python / Ultralytics / OpenCV。画像から果実を検出し熟度を推論する独立サービス。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features (front-end focus) -->
+    <section class="section">
+      <div class="container">
+        <div class="reveal"><span class="eyebrow">Front-end Highlights</span><h2 class="section-title"><span class="jp">フロントエンドの工夫</span></h2><p class="section-lead">「動く」だけでなく、実務水準の使い勝手・保守性を意識して実装しました。</p></div>
+        <div class="u-grid cols-3 u-mt-8">
+          <div class="card reveal"><h3 style="font-size:var(--fs-h3)">多言語 i18n</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">日本語・中国語・英語の 3 言語を全画面で切り替え。21 の名前空間を整理。</p></div>
+          <div class="card reveal" data-delay="1"><h3 style="font-size:var(--fs-h3)">ダークモード</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">設定を永続化し、システム設定にも追従。目にやさしい配色を両モードで設計。</p></div>
+          <div class="card reveal" data-delay="2"><h3 style="font-size:var(--fs-h3)">レスポンシブ + PWA</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">モバイル最適化とインストール対応。出先のスマホでも検出可能。</p></div>
+          <div class="card reveal"><h3 style="font-size:var(--fs-h3)">結果の可視化</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">Canvas に検出枠を描画。クラス別の絞り込み・集計をその場で表示。</p></div>
+          <div class="card reveal" data-delay="1"><h3 style="font-size:var(--fs-h3)">PDF / 共有</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">検出レポートの PDF 出力・共有リンク・注釈画像ダウンロードに対応。</p></div>
+          <div class="card reveal" data-delay="2"><h3 style="font-size:var(--fs-h3)">パフォーマンス計測</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">独自の計測フックで主要操作の所要時間を可視化し、改善に活用。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section section--ink">
+      <div class="container">
+        <div class="reveal"><span class="eyebrow" style="color:var(--c-accent)">Results</span><h2 class="section-title"><span class="jp">主な成果</span></h2></div>
+        <div class="u-grid cols-4 u-mt-8">
+          <div class="stat reveal"><div class="stat__num"><span data-count="4">4</span><span class="unit">段階</span></div><div class="stat__label">熟度の自動分類<br>（結実 / 転色 / 成熟 / 完熟）</div></div>
+          <div class="stat reveal" data-delay="1"><div class="stat__num"><span data-count="0.78">0.78</span></div><div class="stat__label">mAP@0.5（検出精度）</div></div>
+          <div class="stat reveal" data-delay="2"><div class="stat__num"><span data-count="3">3</span><span class="unit">言語</span></div><div class="stat__label">日 / 中 / 英 対応</div></div>
+          <div class="stat reveal" data-delay="3"><div class="stat__num"><span data-count="3">3</span><span class="unit">層</span></div><div class="stat__label">マイクロサービス構成</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="section">
+      <div class="container">
+        <div class="reveal"><span class="eyebrow">Tech Stack</span><h2 class="section-title"><span class="jp">使用技術</span></h2></div>
+        <div class="u-grid cols-3 u-mt-6" style="gap:var(--sp-6)">
+          <div class="reveal"><h4 class="u-accent" style="margin-bottom:var(--sp-3)">Frontend</h4><div class="stack-grid"><span class="tag">Vue 3</span><span class="tag">Vite</span><span class="tag">TypeScript</span><span class="tag">Element Plus</span><span class="tag">Pinia</span><span class="tag">vue-i18n</span><span class="tag">PWA</span></div></div>
+          <div class="reveal" data-delay="1"><h4 class="u-accent" style="margin-bottom:var(--sp-3)">Backend</h4><div class="stack-grid"><span class="tag">Spring Boot 3</span><span class="tag">Java 17</span><span class="tag">Spring Security</span><span class="tag">JWT</span><span class="tag">JPA</span><span class="tag">iText</span></div></div>
+          <div class="reveal" data-delay="2"><h4 class="u-accent" style="margin-bottom:var(--sp-3)">AI / Infra</h4><div class="stack-grid"><span class="tag">FastAPI</span><span class="tag">YOLOv8</span><span class="tag">OpenCV</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next CTA -->
+    <section class="section section--alt u-center">
+      <div class="container container--narrow">
+        <h2 class="section-title" style="justify-items:center"><span class="jp">サンプル LP も制作しています</span></h2>
+        <div style="margin-top:var(--sp-6);display:flex;gap:var(--sp-3);justify-content:center;flex-wrap:wrap" class="reveal">
+          <a href="../samples/corporate.html" class="btn btn--ghost">コーポレートサイト</a>
+          <a href="../samples/cafe.html" class="btn btn--ghost">カフェ LP</a>
+          <a href="../samples/saas.html" class="btn btn--ghost">SaaS LP</a>
+          <a href="../samples/clinic.html" class="btn btn--ghost">美容クリニック LP</a>
+          <a href="../index.html#contact" class="btn btn--accent">お問い合わせ <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:0">
+        <span>© <span data-year>2026</span> NATSUME SAKIKO. All rights reserved.</span>
+        <a href="../index.html">← ポートフォリオ TOP</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

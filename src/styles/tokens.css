@@ -1,0 +1,104 @@
+/* =============================================================
+   Design Tokens  —  ポートフォリオ デザインシステムの根幹
+   配色テーマ : 朱 (vermilion) × 墨 (ink) × 紙 (paper)
+   日本市場向け Web 制作を意識した、余白・上質感重視のトークン群
+   ============================================================= */
+
+:root {
+  /* ---------- Color : Brand ---------- */
+  --c-ink:        #16130f;   /* 墨 : 見出し・本文の主色 */
+  --c-ink-2:      #403a33;   /* 副次テキスト */
+  --c-ink-3:      #74695f;   /* 補助・キャプション */
+  --c-paper:      #f7f4ee;   /* 紙 : 背景ベース */
+  --c-paper-2:    #efe9df;   /* 背景アクセント（セクション交互） */
+  --c-paper-3:    #e7dfd2;   /* 罫線・薄い面 */
+  --c-white:      #ffffff;
+
+  --c-accent:     #df4d2f;   /* 朱 : ブランドアクセント */
+  --c-accent-d:   #bd3a1f;   /* 濃い朱（hover） */
+  --c-accent-l:   #f6e7e1;   /* 朱の極淡（面） */
+
+  --c-line:       rgba(22, 19, 15, 0.14);
+  --c-line-2:     rgba(22, 19, 15, 0.07);
+  --c-overlay:    rgba(22, 19, 15, 0.55);
+
+  /* ---------- Typography ---------- */
+  --font-sans: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, system-ui, sans-serif;
+  --font-serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho",
+    "YuMincho", serif;
+  --font-mono: "SFMono-Regular", "Roboto Mono", Consolas, Menlo, monospace;
+
+  /* fluid type scale (clamp = レスポンシブ無段階) */
+  --fs-display: clamp(2.75rem, 1.2rem + 6.4vw, 6rem);
+  --fs-h1:      clamp(2rem, 1.2rem + 3.4vw, 3.5rem);
+  --fs-h2:      clamp(1.6rem, 1.1rem + 2.1vw, 2.6rem);
+  --fs-h3:      clamp(1.25rem, 1rem + 1vw, 1.6rem);
+  --fs-lead:    clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+  --fs-body:    1rem;
+  --fs-sm:      0.875rem;
+  --fs-xs:      0.75rem;
+
+  --lh-tight:   1.18;
+  --lh-snug:    1.45;
+  --lh-body:    1.85;   /* 日本語は行間広めが読みやすい */
+
+  --ls-wide:    0.18em; /* ラベル・英字見出し */
+  --ls-tight:   -0.01em;
+
+  /* ---------- Spacing scale (8px base) ---------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+  --sp-10: 8rem;
+
+  /* セクション上下余白（レスポンシブ） */
+  --section-y: clamp(4rem, 2.5rem + 7vw, 9rem);
+
+  /* ---------- Layout ---------- */
+  --container: 1200px;
+  --container-narrow: 820px;
+  --gutter: clamp(1.25rem, 0.5rem + 3vw, 3rem);
+
+  /* ---------- Radius ---------- */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* ---------- Shadow ---------- */
+  --sh-sm: 0 1px 2px rgba(22, 19, 15, 0.06), 0 1px 3px rgba(22, 19, 15, 0.08);
+  --sh-md: 0 6px 16px rgba(22, 19, 15, 0.08), 0 2px 6px rgba(22, 19, 15, 0.06);
+  --sh-lg: 0 18px 48px rgba(22, 19, 15, 0.12), 0 6px 16px rgba(22, 19, 15, 0.08);
+  --sh-accent: 0 12px 30px rgba(223, 77, 47, 0.28);
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 0.18s;
+  --t-base: 0.32s;
+  --t-slow: 0.6s;
+
+  /* ---------- Z-index ---------- */
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-top: 300;
+
+  --header-h: 72px;
+}
+
+/* prefers-reduced-motion 対応（アクセシビリティ） */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 0.001s;
+    --t-base: 0.001s;
+    --t-slow: 0.001s;
+  }
+}

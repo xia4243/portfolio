@@ -1,0 +1,11 @@
+# 全テキストを LF に正規化（クロスプラットフォーム一貫性）
+* text=auto eol=lf
+
+# バイナリ
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

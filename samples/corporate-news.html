@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>お知らせ一覧 ｜ 株式会社ノルド（NORD Inc.）｜ コーポレートサイト サンプル ｜ 夏目崎子 ポートフォリオ</title>
+  <meta name="description" content="架空の B2B 企業「株式会社ノルド」のお知らせ一覧ページ。コーポレートサイト制作のサンプル（下層ページ）です。" />
+  <meta name="theme-color" content="#0f1b2d" />
+
+  <!-- OGP -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="お知らせ一覧 ｜ 株式会社ノルド（NORD Inc.）｜ コーポレートサイト サンプル" />
+  <meta property="og:description" content="コーポレートサイト制作のサンプル下層ページ（架空の B2B 企業）。設計・デザイン・実装：夏目崎子。" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="../og.svg" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1b2d'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%233f7ac4'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== Corporate theme : deep navy × slate blue（corporate.html と共通） ===== */
+    body.theme-corporate {
+      --c-ink: #0f1b2d;
+      --c-ink-2: #38465a;
+      --c-ink-3: #6b7889;
+      --c-paper: #f5f7fa;
+      --c-paper-2: #eaeef4;
+      --c-paper-3: #dde3ec;
+      --c-accent: #3f7ac4;
+      --c-accent-d: #2f63a8;
+      --c-accent-l: #e2ecf7;
+      --c-line: rgba(15, 27, 45, 0.13);
+      --c-line-2: rgba(15, 27, 45, 0.07);
+      --font-serif: "Shippori Mincho B1", serif;
+    }
+    /* sample ribbon */
+    .sample-bar {
+      position: fixed; inset: 0 0 auto 0; z-index: var(--z-top);
+      background: var(--c-ink); color: #fff;
+      font-size: var(--fs-xs); padding: 0.5em 1em;
+      display: flex; justify-content: space-between; align-items: center; gap: 1em;
+    }
+    .sample-bar a { color: #fff; font-weight: 600; display: inline-flex; gap: .4em; align-items: center; }
+    .sample-bar a:hover { color: var(--c-accent-l); }
+
+    .lp { padding-top: 36px; }
+
+    /* page header (下層ページの見出し帯) */
+    .page-head {
+      position: relative; overflow: hidden; color: #fff;
+      padding-block: var(--sp-8) var(--sp-7);
+      background:
+        linear-gradient(180deg, rgba(8,15,26,.35), rgba(8,15,26,.55)),
+        radial-gradient(120% 100% at 80% -10%, #20406b 0%, #0f1b2d 62%);
+    }
+    .page-head::after {
+      content: ""; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 48px 48px; opacity: .5; -webkit-mask-image: linear-gradient(180deg,#000,transparent);
+              mask-image: linear-gradient(180deg,#000,transparent);
+    }
+    .page-head .inner { position: relative; z-index: 2; }
+    .page-head .eyebrow { color: #8fb6e6; }
+    .page-head .eyebrow::before { background: #8fb6e6; }
+    .page-head h1 { font-family: var(--font-serif); font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem); margin-top: var(--sp-3); }
+    .crumbs { font-size: var(--fs-xs); color: rgba(255,255,255,.7); display: flex; gap: .5em; align-items: center; }
+    .crumbs a { color: rgba(255,255,255,.7); }
+    .crumbs a:hover { color: #fff; }
+
+    /* News list（corporate.html の .news と同一トークン） */
+    .news { display: grid; gap: 0; }
+    .news .item {
+      display: grid; grid-template-columns: 120px 110px 1fr; gap: var(--sp-4);
+      align-items: baseline; padding: var(--sp-5) 0; border-bottom: 1px solid var(--c-line-2);
+      transition: background var(--t-fast) var(--ease);
+    }
+    .news .item:first-child { border-top: 1px solid var(--c-line-2); }
+    .news .item:hover { background: var(--c-paper-2); }
+    .news .item time { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--c-ink-3); }
+    .news .item .cat { justify-self: start; }
+    .news .item p { font-size: var(--fs-sm); }
+    @media (max-width: 640px){ .news .item{ grid-template-columns: max-content max-content; grid-auto-flow: row; gap: var(--sp-2) var(--sp-4); } .news .item p{ grid-column: 1 / -1; } }
+
+    .back-link { margin-top: var(--sp-8); }
+    .lp-foot { text-align: center; padding: var(--sp-6); font-size: var(--fs-xs); color: var(--c-ink-3); }
+  </style>
+</head>
+
+<body class="theme-corporate">
+  <div class="sample-bar">
+    <span>これは架空のサンプル LP です（コーポレートサイト下層ページ）</span>
+    <a href="../index.html">← ポートフォリオに戻る</a>
+  </div>
+
+  <main class="lp">
+    <!-- Page header -->
+    <section class="page-head">
+      <div class="container inner">
+        <nav class="crumbs reveal" aria-label="パンくずリスト">
+          <a href="corporate.html">トップ</a><span aria-hidden="true">/</span><span>お知らせ</span>
+        </nav>
+        <span class="eyebrow reveal" data-delay="1">News</span>
+        <h1 class="reveal" data-delay="1">お知らせ一覧</h1>
+      </div>
+    </section>
+
+    <!-- News list -->
+    <section class="section">
+      <div class="container container--narrow">
+        <div class="news reveal">
+          <div class="item"><time datetime="2026-04-01">2026.04.01</time><span class="tag tag--accent cat">お知らせ</span><p>第二工場の稼働を開始しました。生産能力を増強し、短納期対応を強化します。</p></div>
+          <div class="item"><time datetime="2026-03-12">2026.03.12</time><span class="tag cat">製品</span><p>新型 NC 工作機械を導入し、対応可能な加工サイズを拡大しました（サンプル）。</p></div>
+          <div class="item"><time datetime="2026-02-15">2026.02.15</time><span class="tag cat">展示会</span><p>「精密加工技術展 2026」に出展しました。多数のご来場ありがとうございました。</p></div>
+          <div class="item"><time datetime="2026-01-20">2026.01.20</time><span class="tag tag--accent cat">お知らせ</span><p>品質マネジメント体制を見直し、検査工程のトレーサビリティを強化しました。</p></div>
+          <div class="item"><time datetime="2026-01-10">2026.01.10</time><span class="tag cat">採用</span><p>2027 年度 新卒採用エントリーの受付を開始しました（サンプル）。</p></div>
+          <div class="item"><time datetime="2025-12-01">2025.12.01</time><span class="tag cat">お知らせ</span><p>年末年始の休業期間についてご案内します（12/29〜1/4）。</p></div>
+        </div>
+
+        <div class="back-link reveal">
+          <a href="corporate.html" class="link"><span class="arrow">←</span> 会社トップに戻る</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <p class="lp-foot">© <span data-year>2026</span> 株式会社ノルド（架空）・ サンプル制作：夏目崎子 ｜ <a class="link" href="../index.html">ポートフォリオに戻る</a></p>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

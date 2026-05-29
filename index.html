@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>夏目崎子 ｜ Web制作・フロントエンド ポートフォリオ</title>
+  <meta name="description" content="フリーランスの Web エンジニア／デザイナー。ランディングページ・コーポレートサイトの新規制作から既存サイト改修・フロントエンド実装まで、設計からコードまで一気通貫で対応します。" />
+  <meta name="theme-color" content="#f7f4ee" />
+
+  <!-- OGP -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="夏目崎子 ｜ Web制作・フロントエンド ポートフォリオ" />
+  <meta property="og:description" content="設計・デザイン・実装を一気通貫。LP / コーポレートサイト制作・改修・フロントエンド実装。" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="./og.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- canonical : 公開時は実ドメインに差し替えてください（例: https://your-domain.example/） -->
+  <!-- <link rel="canonical" href="https://your-domain.example/" /> -->
+
+  <!-- 構造化データ : schema.org Person（公開時は url / sameAs を実値に） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "夏目崎子",
+    "alternateName": "NATSUME SAKIKO",
+    "jobTitle": "Web エンジニア / デザイナー",
+    "url": "https://your-domain.example/",
+    "email": "mailto:hello@example.com",
+    "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "Vue", "Figma", "Web制作", "フロントエンド", "コーポレートサイト制作"],
+    "knowsLanguage": ["ja", "zh", "en"],
+    "sameAs": ["https://github.com/xia4243"]
+  }
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316130f'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23df4d2f'/%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho+B1:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      padding-top: calc(var(--header-h) + clamp(2rem, 6vw, 5rem));
+      padding-bottom: var(--section-y);
+      overflow: hidden;
+    }
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--sp-7);
+      align-items: center;
+    }
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6em;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      padding: 0.5em 1em;
+      border: 1px solid var(--c-line);
+      border-radius: var(--r-pill);
+      background: var(--c-white);
+    }
+    .availability .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: #2fae6a; position: relative;
+    }
+    .availability .dot::after {
+      content: ""; position: absolute; inset: -5px; border-radius: 50%;
+      border: 2px solid #2fae6a; opacity: 0.5;
+      animation: ping 1.8s var(--ease) infinite;
+    }
+    @keyframes ping { 0%{transform:scale(0.6);opacity:.6} 80%,100%{transform:scale(1.5);opacity:0} }
+
+    .hero h1 {
+      font-size: var(--fs-display);
+      margin-top: var(--sp-5);
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em { color: var(--c-accent); font-style: normal; }
+    .hero__lead {
+      font-size: var(--fs-lead);
+      color: var(--c-ink-2);
+      max-width: 46ch;
+      margin-top: var(--sp-5);
+    }
+    .hero__cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
+
+    /* hero visual : 朱の円 + 浮遊チップ */
+    .hero__visual { position: relative; aspect-ratio: 1; min-height: 320px; }
+    .hero__circle {
+      position: absolute; inset: 8% 8% 8% 8%;
+      border-radius: 50%;
+      background: radial-gradient(120% 120% at 30% 25%, #f06b4f 0%, var(--c-accent) 45%, var(--c-accent-d) 100%);
+      box-shadow: var(--sh-lg);
+    }
+    .hero__circle::after {
+      content: "成果"; position: absolute; inset: 0;
+      display: grid; place-items: center;
+      font-family: var(--font-serif); font-weight: 700;
+      font-size: clamp(2.5rem, 8vw, 5rem); color: rgba(255,255,255,0.92);
+      letter-spacing: 0.1em;
+    }
+    .chip {
+      position: absolute;
+      background: var(--c-white);
+      border: 1px solid var(--c-line-2);
+      box-shadow: var(--sh-md);
+      border-radius: var(--r-pill);
+      padding: 0.55em 1.05em;
+      font-size: var(--fs-sm); font-weight: 600;
+      display: inline-flex; align-items: center; gap: 0.45em;
+      animation: float 5s var(--ease-in-out) infinite;
+    }
+    .chip i { width: 8px; height: 8px; border-radius: 2px; background: var(--c-accent); }
+    .chip--1 { top: 4%; left: -4%; animation-delay: 0s; }
+    .chip--2 { top: 40%; right: -8%; animation-delay: 0.8s; }
+    .chip--3 { bottom: 6%; left: 2%; animation-delay: 1.6s; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    @media (max-width: 820px) {
+      .hero__grid { grid-template-columns: 1fr; gap: var(--sp-6); }
+      .hero__visual { order: -1; max-width: 360px; margin-inline: auto; }
+    }
+
+    /* ---------- Marquee ---------- */
+    .marquee {
+      border-block: 1px solid var(--c-line-2);
+      background: var(--c-paper-2);
+      padding-block: var(--sp-4);
+      overflow: hidden;
+      white-space: nowrap;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .marquee__track { display: inline-flex; gap: var(--sp-6); animation: scroll 28s linear infinite; }
+    .marquee:hover .marquee__track { animation-play-state: paused; }
+    .marquee span {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--c-ink-2);
+      display: inline-flex; align-items: center; gap: var(--sp-6);
+    }
+    .marquee span::after { content: "✦"; color: var(--c-accent); font-size: 0.7em; }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+
+    /* ---------- About ---------- */
+    .about__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--sp-8); align-items: start; }
+    .about__photo {
+      aspect-ratio: 3/4; border-radius: var(--r-lg);
+      background:
+        repeating-linear-gradient(135deg, var(--c-paper-3) 0 2px, transparent 2px 14px),
+        linear-gradient(160deg, var(--c-paper-2), var(--c-paper-3));
+      display: grid; place-items: center; text-align: center;
+      color: var(--c-ink-3); position: relative; overflow: hidden;
+    }
+    .about__photo .ph { font-size: var(--fs-sm); }
+    .about__photo .mark {
+      font-family: var(--font-serif); font-size: 4rem; color: var(--c-accent); line-height: 1;
+    }
+    .about p + p { margin-top: var(--sp-4); }
+    .about__name { font-family: var(--font-serif); font-size: var(--fs-h3); margin-bottom: var(--sp-2); }
+    .about__role { font-size: var(--fs-sm); letter-spacing: var(--ls-wide); color: var(--c-accent); text-transform: uppercase; }
+    @media (max-width: 820px) {
+      .about__grid { grid-template-columns: 1fr; gap: var(--sp-6); }
+      .about__photo { max-width: 280px; }
+    }
+
+    /* ---------- Services ---------- */
+    .service {
+      display: flex; flex-direction: column; gap: var(--sp-3);
+      height: 100%;
+    }
+    .service__no { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--c-accent); }
+    .service h3 { font-size: var(--fs-h3); }
+    .service p { font-size: var(--fs-sm); color: var(--c-ink-2); }
+    .service ul { margin-top: auto; padding-top: var(--sp-3); }
+    .service li { font-size: var(--fs-xs); color: var(--c-ink-3); padding-left: 1.2em; position: relative; margin-bottom: 0.3em; }
+    .service li::before { content: "—"; position: absolute; left: 0; color: var(--c-accent); }
+
+    /* ---------- Works ---------- */
+    .works__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
+    .work { display: block; border-radius: var(--r-lg); overflow: hidden; background: var(--c-white); border: 1px solid var(--c-line-2); transition: transform var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease); }
+    .work:hover { transform: translateY(-6px); box-shadow: var(--sh-lg); }
+    .work__thumb { aspect-ratio: 16/10; position: relative; overflow: hidden; display: grid; place-items: center; }
+    .work__thumb .label { position: absolute; top: 14px; left: 14px; z-index: 2; }
+    .work__thumb .mock {
+      position: absolute; inset: 18% 12% -2% 12%;
+      background: var(--c-white); border-radius: 10px 10px 0 0;
+      box-shadow: var(--sh-lg); overflow: hidden;
+    }
+    .work__thumb .mock::before { content: ""; display: block; height: 22px; background: var(--c-paper-2); border-bottom: 1px solid var(--c-line-2); }
+    .work__thumb .mock::after {
+      content: ""; display: block; height: 100%;
+      background:
+        linear-gradient(var(--c-paper-2) 0 0) 12px 16px / 60% 14px no-repeat,
+        linear-gradient(var(--c-paper-3) 0 0) 12px 38px / 40% 10px no-repeat,
+        linear-gradient(var(--c-accent-l) 0 0) 12px 60px / 30% 30px no-repeat;
+    }
+    .t-strawberry { background: linear-gradient(150deg, #ffe3d8, #ffb59e 60%, #ff8f6e); }
+    .t-cafe       { background: linear-gradient(150deg, #efe3d2, #cdb18a 60%, #a07c54); }
+    .t-saas       { background: linear-gradient(150deg, #dfe6ff, #9aa9ee 60%, #5b6fd6); }
+    .t-clinic     { background: linear-gradient(150deg, #d8f0ee, #a6dcd6 60%, #6cc0b8); }
+    .t-corporate  { background: linear-gradient(150deg, #dbe6f4, #8aaad6 60%, #3f6fb0); }
+    .work__body { padding: var(--sp-5) var(--sp-6) var(--sp-6); }
+    .work__cat { font-size: var(--fs-xs); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--c-ink-3); }
+    .work h3 { font-size: var(--fs-h3); margin: var(--sp-2) 0; }
+    .work__desc { font-size: var(--fs-sm); color: var(--c-ink-2); margin-bottom: var(--sp-4); }
+    @media (max-width: 720px) { .works__grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Process ---------- */
+    .process__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); counter-reset: step; }
+    .step { position: relative; padding-top: var(--sp-6); }
+    .step::before {
+      counter-increment: step; content: "0" counter(step);
+      font-family: var(--font-serif); font-size: 2.4rem; color: var(--c-accent); line-height: 1;
+      position: absolute; top: -6px; left: 0;
+    }
+    .step h3 { font-size: var(--fs-h3); margin-bottom: var(--sp-2); padding-top: var(--sp-4); border-top: 2px solid var(--c-ink); }
+    .step p { font-size: var(--fs-sm); color: var(--c-ink-2); }
+    @media (max-width: 820px) { .process__grid { grid-template-columns: 1fr 1fr; gap: var(--sp-6); } }
+    @media (max-width: 480px) { .process__grid { grid-template-columns: 1fr; } }
+
+    /* ---------- Contact ---------- */
+    .contact__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); align-items: start; }
+    .field { margin-bottom: var(--sp-4); }
+    .field label { display: block; font-size: var(--fs-sm); font-weight: 600; margin-bottom: var(--sp-2); }
+    .field input, .field textarea {
+      width: 100%; padding: 0.85em 1em; border: 1px solid var(--c-line);
+      border-radius: var(--r-md); background: var(--c-white);
+      transition: border-color var(--t-fast), box-shadow var(--t-fast);
+    }
+    .field input:focus, .field textarea:focus {
+      outline: none; border-color: var(--c-accent);
+      box-shadow: 0 0 0 3px var(--c-accent-l);
+    }
+    .field textarea { resize: vertical; min-height: 130px; }
+    .contact__info dt { font-size: var(--fs-xs); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--c-ink-3); margin-top: var(--sp-5); }
+    .contact__info dd { font-size: var(--fs-lead); font-weight: 600; }
+    .form-note { font-size: var(--fs-xs); color: var(--c-ink-3); margin-top: var(--sp-2); }
+    @media (max-width: 760px) { .contact__grid { grid-template-columns: 1fr; gap: var(--sp-6); } }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="#top" aria-label="ホーム">
+        <span class="brand__mark">N</span>
+        <span>NATSUME<span class="u-accent">.</span></span>
+      </a>
+      <nav class="nav" aria-label="メインナビゲーション">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#skills">Skills</a>
+        <a href="#works">Works</a>
+        <a href="#process">Process</a>
+        <a href="#contact" class="btn btn--accent" style="padding:.6em 1.3em;">お問い合わせ</a>
+      </nav>
+      <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- mobile drawer -->
+  <nav class="drawer" id="drawer" aria-label="モバイルナビゲーション">
+    <a href="#about"><span>About</span><span class="num">01</span></a>
+    <a href="#services"><span>Services</span><span class="num">02</span></a>
+    <a href="#skills"><span>Skills</span><span class="num">03</span></a>
+    <a href="#works"><span>Works</span><span class="num">04</span></a>
+    <a href="#process"><span>Process</span><span class="num">05</span></a>
+    <a href="#contact"><span>Contact</span><span class="num">06</span></a>
+  </nav>
+
+  <main id="main">
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="top">
+      <div class="container">
+        <div class="hero__grid">
+          <div>
+            <span class="availability reveal"><span class="dot"></span>業務委託・受託案件 受付中</span>
+            <h1 class="reveal" data-delay="1">デザインから実装まで、<br><em>一気通貫</em>でつくる。</h1>
+            <p class="hero__lead reveal" data-delay="2">
+              フリーランスの Web エンジニア／デザイナーです。ランディングページ・
+              コーポレートサイトの新規制作から、既存サイトの改修・フロントエンド実装まで、
+              企画からコードまで一人で完結します。
+            </p>
+            <div class="hero__cta reveal" data-delay="3">
+              <a href="#works" class="btn btn--accent btn--lg">実績を見る <span class="arrow">↓</span></a>
+              <a href="#contact" class="btn btn--ghost btn--lg">お問い合わせ</a>
+            </div>
+          </div>
+          <div class="hero__visual reveal" data-delay="2" aria-hidden="true">
+            <div class="hero__circle"></div>
+            <span class="chip chip--1"><i></i>Figma</span>
+            <span class="chip chip--2"><i></i>レスポンシブ</span>
+            <span class="chip chip--3"><i></i>HTML / CSS / JS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Marquee ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Landing Page</span><span>Webデザイン</span><span>レスポンシブ</span><span>UI / UX</span><span>フロントエンド</span><span>サイト改修</span>
+        <span>Landing Page</span><span>Webデザイン</span><span>レスポンシブ</span><span>UI / UX</span><span>フロントエンド</span><span>サイト改修</span>
+      </div>
+    </div>
+
+    <!-- ============ About ============ -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__photo reveal">
+            <div>
+              <div class="mark">N</div>
+              <p class="ph">プロフィール写真<br>（ここに差し替え）</p>
+            </div>
+          </div>
+          <div class="about reveal" data-delay="1">
+            <span class="eyebrow">About me</span>
+            <h2 class="section-title"><span class="jp">つくるのは、成果につながる Web。</span></h2>
+            <p class="about__role u-mt-4">Web Engineer / Designer ・ Freelance</p>
+            <p class="about__name u-mt-2">夏目 崎子 <span style="font-size:.7em;color:var(--c-ink-3)">NATSUME SAKIKO</span></p>
+            <p>
+              情報系のバックグラウンドを持ち、Java / Spring Boot・Vue を用いた受託開発を経験。
+              現在はフロントエンドと Web デザインを軸に、フルスタックで Web 制作に取り組んでいます。
+            </p>
+            <p>
+              「見た目を整える」だけでなく、ビジネスの目的から逆算した設計・導線づくりを得意とします。
+              Figma での設計から、レスポンシブなコーディング、AI・API 連携まで一気通貫で対応できるのが強みです。
+            </p>
+            <div class="u-grid cols-4 u-mt-6" style="gap:var(--sp-4)">
+              <div class="stat"><div class="stat__num"><span data-count="15">15</span><span class="unit">+</span></div><div class="stat__label">対応技術・ツール</div></div>
+              <div class="stat"><div class="stat__num">N2</div><div class="stat__label">ビジネス日本語</div></div>
+              <div class="stat"><div class="stat__num">100<span class="unit">%</span></div><div class="stat__label">フルリモート対応</div></div>
+              <div class="stat"><div class="stat__num">1<span class="unit">人</span></div><div class="stat__label">企画〜実装 完結</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Services ============ -->
+    <section class="section section--alt" id="services">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Services</span>
+          <h2 class="section-title"><span class="jp">提供できること</span><span class="en">WHAT I CAN DO</span></h2>
+          <p class="section-lead">スタートアップから中小企業まで、規模・業種を問わず幅広いフェーズの Web 制作に対応します。</p>
+        </div>
+        <div class="u-grid cols-4 u-mt-8">
+          <article class="card service reveal">
+            <span class="service__no">01</span>
+            <h3>ランディングページ制作</h3>
+            <p>コンバージョンを意識した LP を、構成・デザイン・実装までワンストップで。</p>
+            <ul><li>構成・ワイヤーフレーム</li><li>Figma デザイン</li><li>レスポンシブ実装</li></ul>
+          </article>
+          <article class="card service reveal" data-delay="1">
+            <span class="service__no">02</span>
+            <h3>サイト制作・改修</h3>
+            <p>コーポレートサイトの新規制作（0→1）から、既存サイトのデザイン修正・機能追加まで。</p>
+            <ul><li>新規サイト構築</li><li>既存サイト改修</li><li>UI 改善</li></ul>
+          </article>
+          <article class="card service reveal" data-delay="2">
+            <span class="service__no">03</span>
+            <h3>フロントエンド実装</h3>
+            <p>セマンティックな HTML / CSS、モダン JavaScript・Vue でのコーディング。</p>
+            <ul><li>HTML / CSS / JS</li><li>Vue・TypeScript</li><li>パフォーマンス最適化</li></ul>
+          </article>
+          <article class="card service reveal" data-delay="3">
+            <span class="service__no">04</span>
+            <h3>AI・データ連携</h3>
+            <p>画像認識・API 連携など、付加価値の高い機能で他と差をつけます。</p>
+            <ul><li>AI モデル連携</li><li>REST API 連携</li><li>管理画面・可視化</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Skills ============ -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Skills</span>
+          <h2 class="section-title"><span class="jp">スキル</span><span class="en">SKILLS</span></h2>
+          <p class="section-lead">設計・デザインからフロントエンド実装、バックエンド連携まで。Web 制作に必要な領域を一人でカバーします。</p>
+        </div>
+        <div class="u-grid cols-4 u-mt-8">
+          <article class="card reveal">
+            <h3 style="font-size:var(--fs-h3);margin-bottom:var(--sp-4)">フロントエンド開発</h3>
+            <div class="tag-list">
+              <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span>
+              <span class="tag">TypeScript</span><span class="tag">Vue</span><span class="tag">レスポンシブ</span><span class="tag">コーディング</span>
+            </div>
+          </article>
+          <article class="card reveal" data-delay="1">
+            <h3 style="font-size:var(--fs-h3);margin-bottom:var(--sp-4)">Web デザイン</h3>
+            <div class="tag-list">
+              <span class="tag tag--accent">Figma</span><span class="tag">UI/UX</span><span class="tag">Webデザイン</span>
+              <span class="tag">LP制作</span><span class="tag">バナー</span><span class="tag">ロゴ</span>
+            </div>
+          </article>
+          <article class="card reveal" data-delay="2">
+            <h3 style="font-size:var(--fs-h3);margin-bottom:var(--sp-4)">グラフィック / ツール</h3>
+            <div class="tag-list">
+              <span class="tag">Photoshop</span><span class="tag">Illustrator</span><span class="tag">Canva</span><span class="tag">Git</span>
+            </div>
+          </article>
+          <article class="card reveal" data-delay="3">
+            <h3 style="font-size:var(--fs-h3);margin-bottom:var(--sp-4)">バックエンド / その他</h3>
+            <div class="tag-list">
+              <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Python</span><span class="tag">REST API</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Works ============ -->
+    <section class="section section--alt" id="works">
+      <div class="container">
+        <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:var(--sp-4)">
+          <div>
+            <span class="eyebrow">Selected works</span>
+            <h2 class="section-title"><span class="jp">制作実績・サンプル</span><span class="en">WORKS &amp; SAMPLES</span></h2>
+          </div>
+          <p style="max-width:34ch;color:var(--c-ink-2);font-size:var(--fs-sm)">実案件のケーススタディと、業種別に制作したサンプル LP を掲載しています。</p>
+        </div>
+
+        <div class="works__grid u-mt-8">
+          <a class="work reveal" href="works/strawberry.html">
+            <div class="work__thumb t-strawberry">
+              <span class="tag tag--accent label">Case Study</span>
+              <div class="mock" aria-hidden="true"></div>
+            </div>
+            <div class="work__body">
+              <span class="work__cat">Full-stack Web ・ AI</span>
+              <h3>イチゴ熟度検出システム</h3>
+              <p class="work__desc">Vue 3 + Spring Boot + YOLOv8。画像から果実の熟度4段階を自動判定する Web アプリ。設計から実装・公開まで担当。</p>
+              <div class="tag-list"><span class="tag">Vue 3</span><span class="tag">Spring Boot</span><span class="tag">FastAPI</span><span class="tag">YOLOv8</span></div>
+            </div>
+          </a>
+
+          <a class="work reveal" data-delay="1" href="samples/corporate.html">
+            <div class="work__thumb t-corporate">
+              <span class="tag label">Sample Site</span>
+              <div class="mock" aria-hidden="true"></div>
+            </div>
+            <div class="work__body">
+              <span class="work__cat">Corporate Site ・ B2B</span>
+              <h3>コーポレートサイト</h3>
+              <p class="work__desc">精密部品メーカー（架空）向けのコーポレートサイト。事業内容・強み・会社概要・お知らせ・問い合わせ導線を構成。</p>
+              <div class="tag-list"><span class="tag">HTML / CSS</span><span class="tag">情報設計</span><span class="tag">レスポンシブ</span></div>
+            </div>
+          </a>
+
+          <a class="work reveal" data-delay="2" href="samples/cafe.html">
+            <div class="work__thumb t-cafe">
+              <span class="tag label">Sample LP</span>
+              <div class="mock" aria-hidden="true"></div>
+            </div>
+            <div class="work__body">
+              <span class="work__cat">Landing Page ・ 飲食</span>
+              <h3>カフェ／ベーカリー LP</h3>
+              <p class="work__desc">温かみのある世界観で来店を促す、飲食店向けのランディングページ。メニュー・店舗情報・予約導線を1枚に。</p>
+              <div class="tag-list"><span class="tag">HTML / CSS</span><span class="tag">レスポンシブ</span><span class="tag">ブランディング</span></div>
+            </div>
+          </a>
+
+          <a class="work reveal" data-delay="3" href="samples/saas.html">
+            <div class="work__thumb t-saas">
+              <span class="tag label">Sample LP</span>
+              <div class="mock" aria-hidden="true"></div>
+            </div>
+            <div class="work__body">
+              <span class="work__cat">Landing Page ・ SaaS</span>
+              <h3>SaaS／スタートアップ LP</h3>
+              <p class="work__desc">プロダクトの価値を端的に伝え、無料登録へ導く SaaS 向け LP。料金表・機能比較・CTA を最適配置。</p>
+              <div class="tag-list"><span class="tag">UI / UX</span><span class="tag">CVR 設計</span><span class="tag">アニメーション</span></div>
+            </div>
+          </a>
+
+          <a class="work reveal" data-delay="4" href="samples/clinic.html">
+            <div class="work__thumb t-clinic">
+              <span class="tag label">Sample LP</span>
+              <div class="mock" aria-hidden="true"></div>
+            </div>
+            <div class="work__body">
+              <span class="work__cat">Landing Page ・ 美容／医療</span>
+              <h3>美容クリニック LP</h3>
+              <p class="work__desc">清潔感と信頼感を重視した、美容クリニック向けの LP。施術メニュー・料金・予約をやさしい配色でまとめました。</p>
+              <div class="tag-list"><span class="tag">ブランディング</span><span class="tag">予約導線</span><span class="tag">アクセシビリティ</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Stats band ============ -->
+    <section class="section section--ink">
+      <div class="container">
+        <div class="u-grid cols-4">
+          <div class="stat reveal"><div class="stat__num">設計→実装</div><div class="stat__label">一気通貫で対応</div></div>
+          <div class="stat reveal" data-delay="1"><div class="stat__num">平日夜<span class="unit">/</span>土日</div><div class="stat__label">柔軟に稼働可能</div></div>
+          <div class="stat reveal" data-delay="2"><div class="stat__num"><span data-count="24">24</span><span class="unit">h</span></div><div class="stat__label">以内に一次返信</div></div>
+          <div class="stat reveal" data-delay="3"><div class="stat__num">Figma</div><div class="stat__label">デザイン納品対応</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Process ============ -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Process</span>
+          <h2 class="section-title"><span class="jp">制作の進め方</span><span class="en">HOW IT WORKS</span></h2>
+        </div>
+        <div class="process__grid u-mt-8">
+          <div class="step reveal"><h3>ヒアリング</h3><p>目的・ターゲット・要件を整理し、ゴールを明確にします。</p></div>
+          <div class="step reveal" data-delay="1"><h3>設計・デザイン</h3><p>構成・ワイヤーフレームを固め、Figma でデザインを作成します。</p></div>
+          <div class="step reveal" data-delay="2"><h3>実装</h3><p>レスポンシブにコーディング。表示速度・アクセシビリティにも配慮。</p></div>
+          <div class="step reveal" data-delay="3"><h3>公開・運用</h3><p>テスト・公開後の改修や運用サポートまで継続的に対応します。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Contact ============ -->
+    <section class="section section--alt" id="contact">
+      <div class="container container--narrow">
+        <div class="reveal u-center">
+          <span class="eyebrow" style="justify-content:center">Contact</span>
+          <h2 class="section-title"><span class="jp">お気軽にご相談ください</span><span class="en">GET IN TOUCH</span></h2>
+          <p class="section-lead u-mx-auto" style="text-align:center">案件のご相談・お見積りは下記フォーム、または各種リンクよりお問い合わせください。</p>
+        </div>
+
+        <div class="contact__grid u-mt-8">
+          <form class="reveal" id="contact-form" novalidate>
+            <div class="field">
+              <label for="cf-name">お名前</label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" placeholder="夏目 崎子" required />
+            </div>
+            <div class="field">
+              <label for="cf-email">メールアドレス</label>
+              <input id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label for="cf-msg">ご相談内容</label>
+              <textarea id="cf-msg" name="message" placeholder="案件の概要・ご予算・希望納期など" required></textarea>
+            </div>
+            <button type="submit" class="btn btn--accent btn--lg" style="width:100%">送信する <span class="arrow">→</span></button>
+            <p class="form-note">※ 本フォームはデモです。実運用では Formspree / Netlify Forms 等の接続が必要です（README 参照）。</p>
+          </form>
+
+          <div class="contact__info reveal" data-delay="1">
+            <dl>
+              <dt>Email</dt>
+              <dd>hello@example.com</dd>
+              <dt>GitHub</dt>
+              <dd><a class="link" href="https://github.com/xia4243" target="_blank" rel="noopener">github.com/xia4243 <span class="arrow">↗</span></a></dd>
+              <dt>稼働形態</dt>
+              <dd>業務委託・フルリモート</dd>
+              <dt>稼働時間</dt>
+              <dd>週10〜15時間（平日夜・土日可）</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-cta u-serif reveal">いっしょに、<br>つくりましょう。</p>
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#top" style="color:var(--c-paper)">
+            <span class="brand__mark">N</span><span>NATSUME<span class="u-accent">.</span></span>
+          </a>
+          <p style="margin-top:var(--sp-4);font-size:var(--fs-sm);opacity:.7;max-width:34ch">
+            Web 制作・フロントエンド開発・デザイン。設計から実装まで一気通貫で対応するフリーランスです。
+          </p>
+        </div>
+        <div>
+          <h4>Menu</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#works">Works</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Works</h4>
+          <ul>
+            <li><a href="works/strawberry.html">イチゴ熟度検出システム</a></li>
+            <li><a href="samples/corporate.html">コーポレートサイト</a></li>
+            <li><a href="samples/cafe.html">カフェ LP</a></li>
+            <li><a href="samples/saas.html">SaaS LP</a></li>
+            <li><a href="samples/clinic.html">美容クリニック LP</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> NATSUME SAKIKO. All rights reserved.</span>
+        <span>Designed &amp; built with HTML / CSS / TypeScript ・ Vite</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+  <script type="module" src="/src/contact.ts"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BAKERY &amp; CAFÉ 木ノ実 ｜ サンプル LP ｜ 夏目崎子 ポートフォリオ</title>
+  <meta name="description" content="自家焙煎珈琲と窯焼きパンの店。飲食店向けランディングページの制作サンプルです。" />
+  <meta name="theme-color" content="#2a1d12" />
+
+  <!-- OGP -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="BAKERY &amp; CAFÉ 木ノ実 ｜ サンプル LP ｜ 夏目崎子 ポートフォリオ" />
+  <meta property="og:description" content="自家焙煎珈琲と窯焼きパンの店。飲食店向けランディングページの制作サンプルです。" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="../og.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232a1d12'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23c08a4a'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho+B1:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== Cafe theme : 珈琲色 × クリーム ===== */
+    body.theme-cafe {
+      --c-ink: #2a1d12;
+      --c-ink-2: #5a4636;
+      --c-ink-3: #8a7763;
+      --c-paper: #f6efe2;
+      --c-paper-2: #efe4d1;
+      --c-paper-3: #e4d4ba;
+      --c-accent: #b5793f;
+      --c-accent-d: #95612f;
+      --c-accent-l: #efe0cb;
+      --c-line: rgba(42, 29, 18, 0.14);
+      --c-line-2: rgba(42, 29, 18, 0.07);
+      --font-serif: "Shippori Mincho B1", serif;
+    }
+    /* sample ribbon */
+    .sample-bar {
+      position: fixed; inset: 0 0 auto 0; z-index: var(--z-top);
+      background: var(--c-ink); color: var(--c-paper);
+      font-size: var(--fs-xs); padding: 0.5em 1em;
+      display: flex; justify-content: space-between; align-items: center; gap: 1em;
+    }
+    .sample-bar a { color: var(--c-paper); font-weight: 600; display: inline-flex; gap: .4em; align-items: center; }
+    .sample-bar a:hover { color: var(--c-accent); }
+
+    .lp { padding-top: 36px; }
+    .lp-hero {
+      min-height: 92vh; display: grid; place-items: center; text-align: center;
+      position: relative; overflow: hidden; color: #fff;
+      background:
+        linear-gradient(180deg, rgba(20,12,6,.45), rgba(20,12,6,.65)),
+        radial-gradient(120% 90% at 70% 10%, #6a4a2c, #2a1d12 70%);
+    }
+    .lp-hero::after {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 22px 22px; opacity: .5;
+    }
+    .lp-hero .inner { position: relative; z-index: 2; padding: var(--gutter); }
+    .lp-hero .jp-vert { font-family: var(--font-serif); }
+    .lp-hero h1 { font-family: var(--font-serif); font-size: clamp(2.6rem, 1.5rem + 6vw, 6rem); line-height: 1.2; letter-spacing: .08em; }
+    .lp-hero p { margin-top: var(--sp-5); font-size: var(--fs-lead); opacity: .9; letter-spacing: .08em; }
+    .lp-hero .tagline { font-size: var(--fs-sm); letter-spacing: .4em; opacity: .8; }
+
+    .photo-ph {
+      background:
+        repeating-linear-gradient(45deg, var(--c-paper-3) 0 2px, transparent 2px 16px),
+        linear-gradient(160deg, var(--c-paper-2), var(--c-paper-3));
+      display: grid; place-items: center; color: var(--c-ink-3);
+      font-size: var(--fs-sm); border-radius: var(--r-md); text-align: center;
+    }
+
+    .menu-item { display: flex; justify-content: space-between; gap: var(--sp-4); padding: var(--sp-4) 0; border-bottom: 1px dashed var(--c-line); }
+    .menu-item h4 { font-size: var(--fs-body); }
+    .menu-item .desc { font-size: var(--fs-xs); color: var(--c-ink-3); }
+    .menu-item .price { font-family: var(--font-serif); font-size: var(--fs-h3); color: var(--c-accent); white-space: nowrap; }
+
+    .commit { text-align: center; }
+    .commit .ico { width: 64px; height: 64px; margin: 0 auto var(--sp-4); border-radius: 50%; background: var(--c-accent-l); color: var(--c-accent-d); display: grid; place-items: center; font-family: var(--font-serif); font-size: 1.6rem; }
+
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 180px; gap: var(--sp-3); }
+    .gallery > div:nth-child(1) { grid-row: span 2; }
+    .gallery > div:nth-child(4) { grid-column: span 2; }
+    @media (max-width: 640px){ .gallery { grid-template-columns: 1fr 1fr; } .gallery > div:nth-child(4){ grid-column: span 2; } }
+
+    .info-row { display: grid; grid-template-columns: 140px 1fr; gap: var(--sp-4); padding: var(--sp-3) 0; border-bottom: 1px solid var(--c-line-2); font-size: var(--fs-sm); }
+    .info-row dt { font-weight: 700; }
+
+    .lp-cta { text-align: center; background: var(--c-ink); color: #fff; }
+    .lp-cta h2 { font-family: var(--font-serif); font-size: clamp(2rem,1rem+4vw,3.4rem); }
+    .lp-foot { text-align:center; padding: var(--sp-6); font-size: var(--fs-xs); color: var(--c-ink-3); }
+  </style>
+</head>
+
+<body class="theme-cafe">
+  <div class="sample-bar">
+    <span>これは架空のサンプル LP です（飲食店向け）</span>
+    <a href="../index.html">← ポートフォリオに戻る</a>
+  </div>
+
+  <main class="lp">
+    <!-- Hero -->
+    <section class="lp-hero">
+      <div class="inner">
+        <p class="tagline reveal">SINCE 2026 ・ JIYUGAOKA</p>
+        <h1 class="reveal" data-delay="1">木ノ実</h1>
+        <p class="reveal" data-delay="2">自家焙煎珈琲と、窯焼きパンの店。</p>
+        <div class="reveal" data-delay="3" style="margin-top:var(--sp-6);display:flex;gap:var(--sp-3);justify-content:center;flex-wrap:wrap">
+          <a href="#menu" class="btn btn--accent btn--lg">メニューを見る</a>
+          <a href="#access" class="btn btn--ghost btn--lg" style="--c-ink:#fff;color:#fff;border-color:rgba(255,255,255,.4)">アクセス</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Concept -->
+    <section class="section">
+      <div class="container">
+        <div class="u-grid cols-2" style="align-items:center;gap:var(--sp-8)">
+          <div class="photo-ph reveal" style="aspect-ratio:4/3">店舗写真<br>（差し替え）</div>
+          <div class="reveal" data-delay="1">
+            <span class="eyebrow">Concept</span>
+            <h2 class="section-title u-serif"><span class="jp">一杯の珈琲から、<br>はじまる一日を。</span></h2>
+            <p class="section-lead">毎朝その日の分だけ焙煎する珈琲と、石窯で焼き上げるパン。 素材の声に耳をすませた、ていねいな味わいをお届けします。 木のぬくもりに包まれた店内で、ゆっくりとした時間をお過ごしください。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu -->
+    <section class="section section--alt" id="menu">
+      <div class="container container--narrow">
+        <div class="reveal u-center">
+          <span class="eyebrow" style="justify-content:center">Menu</span>
+          <h2 class="section-title u-serif"><span class="jp">おしながき</span></h2>
+        </div>
+        <div class="u-grid cols-2 u-mt-8" style="gap:var(--sp-8)">
+          <div class="reveal">
+            <h3 class="u-serif" style="color:var(--c-accent);margin-bottom:var(--sp-3)">COFFEE</h3>
+            <div class="menu-item"><div><h4>本日の珈琲</h4><p class="desc">日替わりの自家焙煎シングルオリジン</p></div><span class="price">¥520</span></div>
+            <div class="menu-item"><div><h4>カフェラテ</h4><p class="desc">エスプレッソとミルクのバランス</p></div><span class="price">¥580</span></div>
+            <div class="menu-item"><div><h4>水出しコーヒー</h4><p class="desc">8時間かけて抽出したまろやかな一杯</p></div><span class="price">¥600</span></div>
+          </div>
+          <div class="reveal" data-delay="1">
+            <h3 class="u-serif" style="color:var(--c-accent);margin-bottom:var(--sp-3)">BAKERY</h3>
+            <div class="menu-item"><div><h4>クロワッサン</h4><p class="desc">発酵バター香る、サクッとした食感</p></div><span class="price">¥320</span></div>
+            <div class="menu-item"><div><h4>カンパーニュ</h4><p class="desc">国産小麦と自家製酵母の田舎パン</p></div><span class="price">¥480</span></div>
+            <div class="menu-item"><div><h4>本日のキッシュ</h4><p class="desc">季節野菜をたっぷりと</p></div><span class="price">¥620</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commitment -->
+    <section class="section">
+      <div class="container">
+        <div class="reveal u-center"><span class="eyebrow" style="justify-content:center">Our Commitment</span><h2 class="section-title u-serif"><span class="jp">三つのこだわり</span></h2></div>
+        <div class="u-grid cols-3 u-mt-8">
+          <div class="commit reveal"><div class="ico">焙</div><h3 class="u-serif">自家焙煎</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">その日に飲む分だけ、店内の焙煎機で丁寧に。</p></div>
+          <div class="commit reveal" data-delay="1"><div class="ico">窯</div><h3 class="u-serif">石窯焼き</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">遠赤外線でふっくら、香ばしく焼き上げます。</p></div>
+          <div class="commit reveal" data-delay="2"><div class="ico">産</div><h3 class="u-serif">国産素材</h3><p style="font-size:var(--fs-sm);color:var(--c-ink-2)">小麦・野菜は信頼できる国内の生産者から。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="reveal"><span class="eyebrow">Gallery</span><h2 class="section-title u-serif"><span class="jp">店内の風景</span></h2></div>
+        <div class="gallery u-mt-6 reveal">
+          <div class="photo-ph">写真 1</div><div class="photo-ph">写真 2</div><div class="photo-ph">写真 3</div>
+          <div class="photo-ph">写真 4（横長）</div><div class="photo-ph">写真 5</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Access -->
+    <section class="section" id="access">
+      <div class="container">
+        <div class="u-grid cols-2" style="gap:var(--sp-8);align-items:start">
+          <div class="reveal">
+            <span class="eyebrow">Access</span>
+            <h2 class="section-title u-serif"><span class="jp">店舗情報</span></h2>
+            <dl class="u-mt-6">
+              <div class="info-row"><dt>住所</dt><dd>東京都目黒区自由が丘0-0-0<br>木ノ実ビル 1F</dd></div>
+              <div class="info-row"><dt>営業時間</dt><dd>8:00 – 19:00</dd></div>
+              <div class="info-row"><dt>定休日</dt><dd>水曜日</dd></div>
+              <div class="info-row"><dt>電話</dt><dd>03-0000-0000</dd></div>
+            </dl>
+          </div>
+          <div class="photo-ph reveal" data-delay="1" style="aspect-ratio:4/3;min-height:300px">地図（Google Map 埋め込み）</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section lp-cta">
+      <div class="container container--narrow">
+        <h2 class="reveal">ご予約・お問い合わせ</h2>
+        <p class="reveal" data-delay="1" style="opacity:.8;margin-top:var(--sp-4)">テラス席・店内貸切のご相談も承ります。</p>
+        <div class="reveal" data-delay="2" style="margin-top:var(--sp-6)"><a href="tel:0300000000" class="btn btn--accent btn--lg">電話で予約する</a></div>
+      </div>
+    </section>
+  </main>
+
+  <p class="lp-foot">© <span data-year>2026</span> 木ノ実（架空）・ サンプル制作：夏目崎子 ｜ <a class="link" href="../index.html">ポートフォリオに戻る</a></p>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
