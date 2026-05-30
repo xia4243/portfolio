@@ -23,6 +23,7 @@ export default defineConfig({
         clinic: resolve(root, 'samples/clinic.html'),
         corporate: resolve(root, 'samples/corporate.html'),
         corporateNews: resolve(root, 'samples/corporate-news.html'),
+        ec: resolve(root, 'samples/ec.html'),
         notfound: resolve(root, '404.html'),
       },
     },
