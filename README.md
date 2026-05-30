@@ -19,6 +19,7 @@ TypeScript（Vite）で構築しています。実案件のケーススタディ
 | サンプル LP ③ | `samples/saas.html` | SaaS／スタートアップ（インディゴ × ブルー） |
 | サンプル LP ④ | `samples/clinic.html` | 美容クリニック（ティール × ブラッシュ） |
 | サンプル LP ⑤ | `samples/ec.html` | 通販／D2C ボタニカル美容液（セージグリーン × クリーム） |
+| サンプル LP ⑥ | `samples/recruit.html` | 採用／求人（テラコッタ × アイボリー） |
 
 各サンプル LP はそれぞれ独立した配色テーマを持ち、「幅広い業種に対応できる」ことを示します。
 

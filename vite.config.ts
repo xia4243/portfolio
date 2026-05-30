@@ -24,6 +24,7 @@ export default defineConfig({
         corporate: resolve(root, 'samples/corporate.html'),
         corporateNews: resolve(root, 'samples/corporate-news.html'),
         ec: resolve(root, 'samples/ec.html'),
+        recruit: resolve(root, 'samples/recruit.html'),
         notfound: resolve(root, '404.html'),
       },
     },
