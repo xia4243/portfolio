@@ -197,3 +197,44 @@ p { text-wrap: pretty; }
   transition: top var(--t-fast) var(--ease);
 }
 .skip-link:focus { top: 16px; }
+
+/* =============================================================
+   Print  —  PDF 保存時に整った見た目に（日本の採用で PDF 化されることが多い）
+   ============================================================= */
+@media print {
+  /* インタラクション系・装飾を隠す */
+  .site-header, .nav-toggle, .drawer, .marquee,
+  .scroll-progress, .back-to-top, .skip-link,
+  .hero__cta, .sample-bar, .case-bar { display: none !important; }
+
+  :root { --section-y: 1.5rem; }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .hero, .case-hero, .lp-hero { padding-top: 1rem !important; }
+
+  /* 背景の濃いセクションは印刷で白地・黒文字に */
+  .section--ink, .lp-cta, .site-footer {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .section--ink .stat__num, .site-footer a { color: #000 !important; }
+
+  /* カード・実績は途中で改ページしない */
+  .card, .work, .service, .position, .voice, .plan,
+  .arch__node, .member, .reveal {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* スクロール演出は印刷時すべて表示 */
+  .reveal { opacity: 1 !important; transform: none !important; }
+
+  a { text-decoration: none; color: inherit; }
+  .btn { border: 1px solid #000 !important; color: #000 !important; background: #fff !important; }
+}
