@@ -215,6 +215,19 @@
     .work__desc { font-size: var(--fs-sm); color: var(--c-ink-2); margin-bottom: var(--sp-4); }
     @media (max-width: 720px) { .works__grid { grid-template-columns: 1fr; } }
 
+    /* Works filter chips */
+    .work-filter { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-6); }
+    .work-chip {
+      font-size: var(--fs-sm); font-weight: 600; color: var(--c-ink-2);
+      padding: 0.5em 1.1em; border: 1px solid var(--c-line); border-radius: var(--r-pill);
+      background: var(--c-white);
+      transition: color var(--t-fast) var(--ease), background var(--t-fast) var(--ease),
+        border-color var(--t-fast) var(--ease);
+    }
+    .work-chip:hover { border-color: var(--c-ink); color: var(--c-ink); }
+    .work-chip.is-active { background: var(--c-ink); color: var(--c-paper); border-color: var(--c-ink); }
+    .work[hidden] { display: none; }
+
     /* ---------- Process ---------- */
     .process__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); counter-reset: step; }
     .step { position: relative; padding-top: var(--sp-6); }
@@ -440,8 +453,15 @@
           <p style="max-width:34ch;color:var(--c-ink-2);font-size:var(--fs-sm)">実案件のケーススタディと、業種別に制作したサンプル LP を掲載しています。</p>
         </div>
 
-        <div class="works__grid u-mt-8">
-          <a class="work reveal" href="works/strawberry.html">
+        <div class="work-filter reveal" role="group" aria-label="実績を業種で絞り込む">
+          <button class="work-chip is-active" data-filter="all" aria-pressed="true">すべて</button>
+          <button class="work-chip" data-filter="app" aria-pressed="false">Webアプリ</button>
+          <button class="work-chip" data-filter="corporate" aria-pressed="false">コーポレート</button>
+          <button class="work-chip" data-filter="lp" aria-pressed="false">LP制作</button>
+        </div>
+
+        <div class="works__grid u-mt-6">
+          <a class="work reveal" data-cat="app" href="works/strawberry.html">
             <div class="work__thumb t-strawberry">
               <span class="tag tag--accent label">Case Study</span>
               <div class="mock" aria-hidden="true"></div>
@@ -454,7 +474,7 @@
             </div>
           </a>
 
-          <a class="work reveal" data-delay="1" href="samples/corporate.html">
+          <a class="work reveal" data-cat="corporate" data-delay="1" href="samples/corporate.html">
             <div class="work__thumb t-corporate">
               <span class="tag label">Sample Site</span>
               <div class="mock" aria-hidden="true"></div>
@@ -467,7 +487,7 @@
             </div>
           </a>
 
-          <a class="work reveal" data-delay="2" href="samples/cafe.html">
+          <a class="work reveal" data-cat="lp" data-delay="2" href="samples/cafe.html">
             <div class="work__thumb t-cafe">
               <span class="tag label">Sample LP</span>
               <div class="mock" aria-hidden="true"></div>
@@ -480,7 +500,7 @@
             </div>
           </a>
 
-          <a class="work reveal" data-delay="3" href="samples/saas.html">
+          <a class="work reveal" data-cat="lp" data-delay="3" href="samples/saas.html">
             <div class="work__thumb t-saas">
               <span class="tag label">Sample LP</span>
               <div class="mock" aria-hidden="true"></div>
@@ -493,7 +513,7 @@
             </div>
           </a>
 
-          <a class="work reveal" data-delay="4" href="samples/clinic.html">
+          <a class="work reveal" data-cat="lp" data-delay="4" href="samples/clinic.html">
             <div class="work__thumb t-clinic">
               <span class="tag label">Sample LP</span>
               <div class="mock" aria-hidden="true"></div>
@@ -506,7 +526,7 @@
             </div>
           </a>
 
-          <a class="work reveal" data-delay="5" href="samples/ec.html">
+          <a class="work reveal" data-cat="lp" data-delay="5" href="samples/ec.html">
             <div class="work__thumb t-ec">
               <span class="tag label">Sample LP</span>
               <div class="mock" aria-hidden="true"></div>
@@ -519,7 +539,7 @@
             </div>
           </a>
 
-          <a class="work reveal" data-delay="1" href="samples/recruit.html">
+          <a class="work reveal" data-cat="lp" data-delay="1" href="samples/recruit.html">
             <div class="work__thumb t-recruit">
               <span class="tag label">Sample LP</span>
               <div class="mock" aria-hidden="true"></div>

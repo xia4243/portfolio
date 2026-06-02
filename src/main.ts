@@ -137,6 +137,28 @@ function initBackToTop(): void {
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
 }
 
+/* ---------- Works category filter ---------- */
+function initWorksFilter(): void {
+  const chips = document.querySelectorAll<HTMLButtonElement>('.work-chip')
+  const works = document.querySelectorAll<HTMLElement>('.work[data-cat]')
+  if (!chips.length || !works.length) return
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const filter = chip.dataset.filter || 'all'
+      chips.forEach((c) => {
+        const active = c === chip
+        c.classList.toggle('is-active', active)
+        c.setAttribute('aria-pressed', String(active))
+      })
+      works.forEach((w) => {
+        const show = filter === 'all' || w.dataset.cat === filter
+        w.hidden = !show
+      })
+    })
+  })
+}
+
 function boot(): void {
   initHeader()
   initDrawer()
@@ -145,6 +167,7 @@ function boot(): void {
   initYear()
   initScrollProgress()
   initBackToTop()
+  initWorksFilter()
 }
 
 if (document.readyState !== 'loading') boot()
